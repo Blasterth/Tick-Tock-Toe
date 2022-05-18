@@ -170,8 +170,6 @@ def player_turn(desired_letter = str):
         player_turn(letter)
 
 
-
-
 def winner_check(ways_to_win):
 
     for item1,item2,item3 in ways_to_win:
