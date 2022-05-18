@@ -1,4 +1,4 @@
-print("Welcome to Tick-Tock-Toe.    Copyright (c) 2022 Parsa Aryan")
+print("Welcome to Tick-Tock-Toe. Copyright (c) 2022 Parsa Aryan")
 print("Please set the Caps Lock to On.")
 
 row1 = [1,2,3]
@@ -220,7 +220,7 @@ def space_cleaner():
 
 
 def replay():
-    replay_confirmation = input("Do you wish to replay? (Y/N)")
+    replay_confirmation = input("Do you wish to replay? (Y/N)").upper()
 
     if len(replay_confirmation) == 0:
         print("No input entered!")
