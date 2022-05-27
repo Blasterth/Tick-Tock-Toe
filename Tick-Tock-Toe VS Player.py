@@ -31,7 +31,7 @@ def player_confirm(desired_letter = str):
         print("No input entered!")
         player_confirm(letter)
 
-    elif player_confirmation[0] == letter:
+    elif player_confirmation[0].lower() == letter.lower():
         print(f"Welcome, Player {letter}")
 
     else:
@@ -55,14 +55,14 @@ def empty_spaces_display():
 
 def player_turn(desired_letter = str):
     letter = desired_letter
-    player_choice = input(f"Please input your letter in your desired space.")
+    player_choice = input(f"Please input the number of your desired space.")
 
     if len(player_choice) == 0:
         print("No input entered!")
         player_turn(letter)
 
     elif player_choice.isnumeric() == True:
-        player_choice = player_choice[0]
+        player_choice = player_choice
         player_choice = int(player_choice)
 
         if player_choice in range(1,10):
@@ -161,9 +161,13 @@ def player_turn(desired_letter = str):
             turn_number += 1
 
         elif player_choice == 0:
-                empty_spaces_display()
-                input("Please input something to progress.")
-                player_turn(letter)
+            empty_spaces_display()
+            input("Please input something to progress.")
+            player_turn(letter)
+
+        elif player_choice > 9 or player_choice < 0:
+            print("Your number is out of range!\nTry Again!")
+            player_turn(letter)
 
     else:
         print("Command not recognized.")
