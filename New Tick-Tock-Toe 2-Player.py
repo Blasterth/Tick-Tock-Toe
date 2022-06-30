@@ -11,10 +11,10 @@ victories = 0
 EMPTY_INPUT_ERROR_MESSAGE = "No input entered!"
 BAD_INPUT_ERROR_MESSAGE = "Command not recognized!"
 OUT_OF_RANGE_ERROR_MESSAGE = "Out of range!"
-SINGLE_VICTORY_MESSAGE = "SINGLE VICTORY!!!"
-DOUBLE_VICTORY_MESSAGE = "DOUBLE VICTORY!!!"
-TRIPLE_VICTORY_MESSAGE = "TRIPLE VICTORY!!!"
-SPIDER_VICTORY_MESSAGE = "SPIDER VICTORY!!!"
+SINGLE_VICTORY_MESSAGE = "---SINGLE VICTORY---"
+DOUBLE_VICTORY_MESSAGE = "---DOUBLE VICTORY---"
+TRIPLE_VICTORY_MESSAGE = "---TRIPLE VICTORY---"
+SPIDER_VICTORY_MESSAGE = "---SPIDER VICTORY---"
 
 
 #Takes input for table size; limitations are for avoiding crazy stuff, like 1000x1000 tables
@@ -196,11 +196,22 @@ def restarter():
     turn_number = 1
     global victories
     victories = 0
+    global table
     table.clear()
+    global table_size 
+    table_size = 3
+    table_size_selection = table_size_select()
+    print(table_size_selection)
+    table_x = table_size
+    table_y = table_size
+    table = ["0"] * table_x
+    for n in range (table_x): table[n] = ["0"] * table_y
 
 
 #Replay options; called in two_player_mode function
 def replay():
+    global table_size
+    table_size
     display()
     replay_confirmation = input("Do you wish to replay? (Y/N)").upper()
 
@@ -209,7 +220,6 @@ def replay():
         replay()
 
     elif replay_confirmation[0] == "Y":
-        table_size_select()
         restarter()
 
     elif replay_confirmation[0] == "N":
