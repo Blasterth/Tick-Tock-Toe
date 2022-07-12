@@ -1,8 +1,11 @@
 print("Welcome to the NEW Tick-Tock-Toe. Copyright (c) 2022 Parsa Aryan")
 print("No need to set the Caps Lock to On anymore.")
 
+
 game_over = False
 turn_number = 1
+empty_space_character = "8"
+table = []
 
 #The number of ways in which a person has won the game
 victories = 0
@@ -40,10 +43,15 @@ table_size_selection = table_size_select()
 print(table_size_selection)
 
 #Table creator
-table_x = table_size
-table_y = table_size
-table = ["0"] * table_x #if table_size==3 >>table=["0","0","0"]
-for n in range (table_x): table[n] = ["0"] * table_y #>>table=[["0","0","0"],["0","0","0"],["0","0","0"]]
+def table_creator():
+    table_x = table_size
+    table_y = table_size
+    global table
+    table = [empty_space_character] * table_x #if table_size==3 >>table=["0","0","0"]
+    for n in range (table_x): table[n] = [empty_space_character] * table_y #>>table=[["0","0","0"],["0","0","0"],["0","0","0"]]
+
+
+table_creator()
 
 
 #Displays the table
@@ -70,14 +78,14 @@ def row_winner_check():
     for l in range(table_size):
         for m in range(table_size):
             rows_to_check.append(table[l][m])
-        if rows_to_check.count(rows_to_check[0]) == len(rows_to_check) and rows_to_check[0] != "0":
+        if rows_to_check.count(rows_to_check[0]) == len(rows_to_check) and rows_to_check[0] != empty_space_character:
             print(f"{rows_to_check[0]} CLEARS ROW {l + 1}.")
             global victories
             victories += 1
             if victories == 1:
-                print(SINGLE_VICTORY_MESSAGE) 
-            global game_over
-            game_over = True
+                print(SINGLE_VICTORY_MESSAGE)
+                global game_over
+                game_over = True
             break
         else:
             rows_to_check.clear()
@@ -89,16 +97,16 @@ def column_winner_check():
     for l in range(table_size):
         for m in range(table_size):
             columns_to_check.append(table[m][l])
-        if columns_to_check.count(columns_to_check[0]) == len(columns_to_check) and columns_to_check[0] != "0":
+        if columns_to_check.count(columns_to_check[0]) == len(columns_to_check) and columns_to_check[0] != empty_space_character:
             print(f"{columns_to_check[0]} CLEARS COLUMN {l + 1}.")
             global victories
             victories += 1
             if victories == 1:
-                print(SINGLE_VICTORY_MESSAGE) 
+                print(SINGLE_VICTORY_MESSAGE)
+                global game_over
+                game_over = True
             elif victories == 2:
                 print(DOUBLE_VICTORY_MESSAGE)
-            global game_over
-            game_over = True
             break
         else:
             columns_to_check.clear()
@@ -110,18 +118,18 @@ def slash_winner_check():
     slash = list()
     for n in range(table_size):
         slash.append(table[n][-(n+1)])
-    if slash.count(slash[0]) == len(slash) and slash[0] != "0":
+    if slash.count(slash[0]) == len(slash) and slash[0] != empty_space_character:
         print(f"{slash[0]} ACHEIVES A SLASH VICTORY.")
         global victories
         victories += 1
         if victories == 1:
             print(SINGLE_VICTORY_MESSAGE)
+            global game_over
+            game_over = True
         elif victories == 2:
             print(DOUBLE_VICTORY_MESSAGE)
         elif victories == 3:
             print(TRIPLE_VICTORY_MESSAGE)
-        global game_over
-        game_over = True
     else:
         pass
 
@@ -131,20 +139,20 @@ def backslash_winner_check():
     backslash = list()
     for n in range(table_size):
         backslash.append(table[n][n])
-    if backslash.count(backslash[0]) == len(backslash) and backslash[0] != "0":
+    if backslash.count(backslash[0]) == len(backslash) and backslash[0] != empty_space_character:
         print(f"{backslash[0]} ACHEIVES A BACKSLASH VICTORY.")
         global victories
         victories += 1
         if victories == 1:
-            print(SINGLE_VICTORY_MESSAGE) 
+            print(SINGLE_VICTORY_MESSAGE)
+            global game_over
+            game_over = True 
         elif victories == 2:
             print(DOUBLE_VICTORY_MESSAGE)
         elif victories == 3:
             print(TRIPLE_VICTORY_MESSAGE)
         elif victories == 4:
             print(SPIDER_VICTORY_MESSAGE)
-            global game_over
-            game_over = True
     else:
         pass
 
@@ -202,10 +210,7 @@ def restarter():
     table_size = 3
     table_size_selection = table_size_select()
     print(table_size_selection)
-    table_x = table_size
-    table_y = table_size
-    table = ["0"] * table_x
-    for n in range (table_x): table[n] = ["0"] * table_y
+    table_creator()
 
 
 #Replay options; called in two_player_mode function
